@@ -26,4 +26,4 @@ db.create_all()
 
 class UsuarioSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'Nombres', 'Apellidos', 'Email', 'Direccion', 'Cedula', 'Celular', 'Rol', 'Contraseña')
+        fields = ('id_usuario', 'Nombres', 'Apellidos', 'Email', 'Direccion', 'Cedula', 'Celular', 'Rol', 'Contraseña')

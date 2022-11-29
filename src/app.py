@@ -299,7 +299,8 @@ def usuarioReservas(usuario):
                     "num_adultos": reserva.Num_adultos,
                     "num_niños": reserva.Num_ninos,
                     "Check_in": reserva.Check_in,
-                    "Check_out": reserva.Check_out
+                    "Check_out": reserva.Check_out,
+                    "Total": reserva.Total
             }
             res.append(aux)  
         return correctResponse(200, datos=res)
@@ -342,20 +343,20 @@ def saveHabitacion():
     else:
         return jsonify(verify)
 
-@app.route('/habitaciones/<id>', methods = ['PUT'])
+@app.route('/habitaciones/mod/<id>', methods = ['PUT'])
 def updateHabitacion(id):
     verify = verificartoken()
     valido = verify["error"] 
     if(valido == False):
         habitacion = Habitacion.query.get(id)
 
-        numero = request.json['Numero']
+        # numero = request.json['Numero']
         estado = request.json['Estado']
-        tipo = request.json['Tipo']
+        # tipo = request.json['Tipo']
 
-        habitacion.Numero = numero
+        # habitacion.Numero = numero
         habitacion.Estado = estado
-        habitacion.Tipo = tipo
+        # habitacion.Tipo = tipo
 
         db.session.commit()
         resultHabitacion = habitacion_schema.dump(habitacion)
@@ -366,16 +367,17 @@ def updateHabitacion(id):
 # Habitaciones disponibles
 @app.route('/habitaciones/disp', methods=['GET'])
 def indexHabitacionesDisp():
-    verify = verificartoken()
-    valido = verify["error"] 
-    if(valido == False):
+    # verify = verificartoken()
+    # valido = verify["error"] 
+    # if(valido == False):
         # all_habitaciones = Habitacion.query.filter(Habitacion.Estado == 1).all()
         # resultHabitaciones = habitaciones_schema.dump(all_habitaciones)
 
         res =[]
         results = db.session.query(Habitacion, Tipo_habitacion).join(Tipo_habitacion).filter(Habitacion.Tipo == Tipo_habitacion.id_tipo).all()  
         for habitacion, tipo in results:
-            aux = {               
+            aux = {          
+                    "id_habitacion":habitacion.id_habitacion,     
                     "Numero": habitacion.Numero ,
                     "Precio": tipo.Precio,
                     "Camas": tipo.Camas,
@@ -385,8 +387,8 @@ def indexHabitacionesDisp():
             res.append(aux)  
 
         return correctResponse(200, datos=res   )
-    else:
-        return jsonify(verify)
+    # else:
+    #     return jsonify(verify)
 
 @app.route('/habitaciones/disp/<people>', methods=['GET'])
 def indexHabitacionesDispPeople(people):
@@ -397,9 +399,10 @@ def indexHabitacionesDispPeople(people):
         # resultHabitaciones = habitaciones_schema.dump(all_habitaciones)
 
         res =[]
-        results = db.session.query(Habitacion, Tipo_habitacion).join(Tipo_habitacion).filter(Habitacion.Tipo == Tipo_habitacion.id_tipo, Tipo_habitacion.Camas >= people).all()  
+        results = db.session.query(Habitacion, Tipo_habitacion).join(Tipo_habitacion).filter(Habitacion.Tipo == Tipo_habitacion.id_tipo, Tipo_habitacion.Camas >= people, Habitacion.Estado == 1).all()  
         for habitacion, tipo in results:
             aux = {               
+                    "id_habitacion":habitacion.id_habitacion,
                     "Numero": habitacion.Numero ,
                     "Precio": tipo.Precio,
                     "Camas": tipo.Camas,

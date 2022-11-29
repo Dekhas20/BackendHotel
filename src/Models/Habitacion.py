@@ -17,4 +17,4 @@ db.create_all()
 
 class HabitacionSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'Numero', 'Estado','Tipo')
+        fields = ('id_habitacion', 'Numero', 'Estado','Tipo')
