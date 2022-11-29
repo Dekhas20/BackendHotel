@@ -1,11 +1,7 @@
 
 from dbm import dumb
-from http.client import HTTPException
-from unittest import result
-from urllib.error import HTTPError
 from flask import Flask,render_template, redirect, url_for, flash, request, jsonify
 from pymysql import IntegrityError
-import sqlalchemy
 
 from Models.Estado_rerserva import Estado_reservaSchema, Estado_reserva
 from Models.Rol import RolSchema, Rol
@@ -17,14 +13,16 @@ from Models.Habitacion import HabitacionSchema, Habitacion
 from Models.Servicios_habitacion import Servicios_habitacionSchema, Servicios_habitacion
 from Models.Reserva import ReservaSchema, Reserva
 from Config.Bd import app, db
-from werkzeug.wrappers.request import Request
-from werkzeug.exceptions import HTTPException, NotFound
+from flask_cors import CORS
 
 import json
 from urllib import response
 from Config.Toke import *
 from flask import Flask, request
 from sqlalchemy import JSON, exc
+
+# app=Flask(__name__,template_folder='templates')
+CORS(app)
 
 # Exceptions
 @app.errorhandler(400)
@@ -55,9 +53,54 @@ def DBError(e):
 def DBError(e):
     return errorResponse(500, "Error de SQLAlchemy")
 
+# @app.errorhandler(jwt.err)
+# def DBError(e):
+#     return errorResponse(500, "Error de SQLAlchemy")
+
+# Raiz
+@app.route('/', methods=['GET'])
+def index():
+    data = {
+        "id" : 1010,
+        "nombre": "Diego"
+    }
+    return render_template('index.html', datos = data)
+
+@app.route('/habitaciones', methods=['GET'])
+def indexHab():
+    data = {
+        "id" : 1010,
+        "nombre": "Diego"
+    }
+    return render_template('habitaciones.html', datos = data)
+
+@app.route('/nosotros', methods=['GET'])
+def indexNos():
+    data = {
+        "id" : 1010,
+        "nombre": "Diego"
+    }
+    return render_template('nosotros.html', datos = data)
+
+@app.route('/galeria', methods=['GET'])
+def indexGal():
+    data = {
+        "id" : 1010,
+        "nombre": "Diego"
+    }
+    return render_template('galeria.html', datos = data)
+
+@app.route('/servicios', methods=['GET'])
+def indexServ():
+    data = {
+        "id" : 1010,
+        "nombre": "Diego"
+    }
+    return render_template('servicios.html', datos = data)
+
 # Token
 
-@app.route('/', methods=['GET'])
+@app.route('/token', methods=['GET'])
 def obtenertoken():
     #var_request = json.loads(event["body"])   
     datatoken = generar_token("William", 123)   
@@ -105,9 +148,9 @@ def indexCliente():
 
 @app.route('/usuario/post', methods = ['POST'])
 def savearticulo():
-    verify = verificartoken()
-    valido = verify["error"] 
-    if(valido == False):
+    # verify = verificartoken()
+    # valido = verify["error"] 
+    # if(valido == False):
         nombres = request.json['Nombres']
         apellidos = request.json['Apellidos']
         email = request.json['Email']
@@ -122,8 +165,8 @@ def savearticulo():
         db.session.commit()
         resultUsuario = usuario_schema.dump(new_Usuario)
         return correctResponse(200, datos=resultUsuario)
-    else:
-        return jsonify(verify)
+    # else:
+    #     return jsonify(verify)
 
 @app.route('/usuario/mod/<id>', methods=['PUT'])
 def update_articulo(id):
@@ -271,7 +314,7 @@ habitacion_schema = HabitacionSchema()
 habitaciones_schema = HabitacionSchema(many=True)
 
 # todas habitaciones
-@app.route('/habitaciones', methods=['GET'])
+@app.route('/habitacionesGet', methods=['GET'])
 def indexHabitaciones():
     verify = verificartoken()
     valido = verify["error"] 
@@ -326,11 +369,48 @@ def indexHabitacionesDisp():
     verify = verificartoken()
     valido = verify["error"] 
     if(valido == False):
-        all_habitaciones = Habitacion.query.filter(Habitacion.Estado == 1).all()
-        resultHabitaciones = habitaciones_schema.dump(all_habitaciones)
-        return correctResponse(200, datos=resultHabitaciones)
+        # all_habitaciones = Habitacion.query.filter(Habitacion.Estado == 1).all()
+        # resultHabitaciones = habitaciones_schema.dump(all_habitaciones)
+
+        res =[]
+        results = db.session.query(Habitacion, Tipo_habitacion).join(Tipo_habitacion).filter(Habitacion.Tipo == Tipo_habitacion.id_tipo).all()  
+        for habitacion, tipo in results:
+            aux = {               
+                    "Numero": habitacion.Numero ,
+                    "Precio": tipo.Precio,
+                    "Camas": tipo.Camas,
+                    "Descripcion": tipo.Descripcion,
+                    "Tipo": tipo.Nombre,
+            }
+            res.append(aux)  
+
+        return correctResponse(200, datos=res   )
     else:
         return jsonify(verify)
+
+@app.route('/habitaciones/disp/<people>', methods=['GET'])
+def indexHabitacionesDispPeople(people):
+    # verify = verificartoken()
+    # valido = verify["error"] 
+    # if(valido == False):
+        # all_habitaciones = Habitacion.query.filter(Habitacion.Estado == 1).all()
+        # resultHabitaciones = habitaciones_schema.dump(all_habitaciones)
+
+        res =[]
+        results = db.session.query(Habitacion, Tipo_habitacion).join(Tipo_habitacion).filter(Habitacion.Tipo == Tipo_habitacion.id_tipo, Tipo_habitacion.Camas >= people).all()  
+        for habitacion, tipo in results:
+            aux = {               
+                    "Numero": habitacion.Numero ,
+                    "Precio": tipo.Precio,
+                    "Camas": tipo.Camas,
+                    "Descripcion": tipo.Descripcion,
+                    "Tipo": tipo.Nombre,
+            }
+            res.append(aux)  
+
+        return correctResponse(200, datos=res   )
+    # else:
+    #     return jsonify(verify)
 
 # Servicios de una habitacion
 @app.route('/habitaciones/servicios/<numero>', methods=['GET'])

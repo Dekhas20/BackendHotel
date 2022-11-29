@@ -26,4 +26,4 @@ db.create_all()
 
 class ReservaSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'Check_in', 'Check_out','id_habitacion', 'id_usuario', 'Estado', 'Num_adultos', 'Num_ninos', 'Estado_reserva', 'Total')
+        fields = ('id_reserva', 'Check_in', 'Check_out','id_habitacion', 'id_usuario', 'Estado', 'Num_adultos', 'Num_ninos', 'Estado_reserva', 'Total')

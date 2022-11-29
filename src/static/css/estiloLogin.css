@@ -1,0 +1,60 @@
+:root{
+    --dark: #16191c;
+    --dark-x: #1e2126;
+    --light: #ffffff;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    font-family: 'League Spartan', sans-serif;
+    font-family: 'Lobster', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: var(--light);
+
+}
+
+.bg-dark { background-color: var(--dark) !important;}
+.bg-dark-x {background-color: var(--dark-x);}
+
+.form-control, .btn{
+    min-height: 3.125rem ;
+    line-height: initial;
+}
+
+.img-1{
+   background-image: url('../img/img-3.jpg'); 
+   background-size: cover;
+   background-position: center;
+}
+
+.img-2{
+    background-image: url('../img/img-2.jpg');  
+    background-size: cover;
+    background-position: center;
+ }
+
+ .img-3{
+    background-image: url('../img/img-1.jpg'); 
+    background-size: cover;
+    background-position: center;
+ }
+
+ .button-log {
+    font: bold 20px Arial;
+    border-radius: 20px;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 15px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+  }

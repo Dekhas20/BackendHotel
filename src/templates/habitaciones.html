@@ -1,0 +1,115 @@
+{% include "layout.html" %}
+
+{% block body %}
+<div class="container mt-3 habitaciones">
+    <div class="row ">
+        <div class="col-lg-4 col-md-6 col-sm-12 p-4">
+            <img src="../Public/img/hab1.jpg" width="60%" alt="" class="col-12">
+            <div class="">
+                <h4 class="text-left pt-3">Estandar</h4>
+                <p>Habitación de 25 m2 con hermosas vistas a la ciudad de Barranquilla. Se puede solicitar con
+                    cama queen
+                    size (1,60 m) o 2 camas individuales de 1,20 x 1,90 m cada una.</p>
+                <button type="button" id="1" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Reservar</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-4">
+            <img src="../Public/img/hab2.jpg" width="60%" alt="" class="col-12">
+            <div>
+                <h4 class="text-left pt-3">Doble</h4>
+                <p>Habitación de 25 m2 con hermosas vistas a la ciudad de Barranquilla. Se puede solicitar con
+                    cama queen
+                    size (1,60 m) o 2 camas individuales de 1,20 x 1,90 m cada una.</p>
+                <button type="button" id="2" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Reservar</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-4">
+            <img src="../Public/img/hab3.jpg" width="60%" alt="" class="col-12">
+            <div>
+                <h4 class="text-left pt-3">Triple</h4>
+                <p>Habitación de 25 m2 con hermosas vistas a la ciudad de Barranquilla. Se puede solicitar con
+                    cama queen
+                    size (1,60 m) o 2 camas individuales de 1,20 x 1,90 m cada una.</p>
+                <button type="button" id="3" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Reservar</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-4">
+            <img src="../Public/img/hab4.jpg" width="60%" alt="" class="col-12">
+            <div>
+                <h4 class="text-left pt-3">Suite</h4>
+                <p>Habitación de 25 m2 con hermosas vistas a la ciudad de Barranquilla. Se puede solicitar con
+                    cama queen
+                    size (1,60 m) o 2 camas individuales de 1,20 x 1,90 m cada una.</p>
+                <button type="button" id="4" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Reservar</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-4">
+            <img src="../Public/img/hab5.jpg" width="60%" alt="" class="col-12">
+            <div>
+                <h4 class="text-left pt-3">Queen</h4>
+                <p>Habitación de 25 m2 con hermosas vistas a la ciudad de Barranquilla. Se puede solicitar con
+                    cama queen
+                    size (1,60 m) o 2 camas individuales de 1,20 x 1,90 m cada una.</p>
+                <button type="button" id="5" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Reservar</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-4">
+            <img src="../Public/img/hab6.jpg" width="60%" alt="" class="col-12">
+            <div>
+                <h4 class="text-left pt-3">Suite presidencial</h4>
+                <p>Habitación de 25 m2 con hermosas vistas a la ciudad de Barranquilla. Se puede solicitar con
+                    cama queen
+                    size (1,60 m) o 2 camas individuales de 1,20 x 1,90 m cada una.</p>
+                <button type="button" id="6" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Reservar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Buscar disponibilidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <label for="" style="color: rgb(0, 0, 0);">Check in</label>
+                        <input class="form-control datetimepicker" type="date" name="" id="">
+                    </div>
+                    <div class="col">
+                        <label for="" style="color: rgb(0, 0, 0);">Check out</label>
+                        <input class="form-control datetimepicker" type="date" name="" id="">
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="" style="color: rgb(0, 0, 0);">Número de adultos</label>
+                        <input class="form-control" type="number" name="" id="">
+                    </div>
+                    <div class="col">
+                        <label for="" style="color: rgb(0, 0, 0);">Número de niños</label>
+                        <input class="form-control" type="number" name="" id="">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-success" href="./info_habitacion.html">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% include "footer.html" %}

@@ -1,0 +1,103 @@
+body {
+    background-color: rgba(240, 248, 255, .5);
+    font-family: -apple-system, 'system-ui'
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+ }
+
+.carousel-inner {
+    max-height: 35rem;
+}
+
+.button-log {
+    position: relative;
+    top: 50%;
+    font: bold 15px Arial;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 10px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+
+.habitaciones {
+    padding: 100px 0 0 0;
+}
+
+.habitaciones img,
+.service img,
+.presentacion img,
+.back-bioseguridad {
+    border-radius: 10px;
+}
+
+.testimonio {
+    margin: 0 4%;
+    padding: 15px;
+    border: 2px solid rgb(228, 228, 228);
+    background-color: white;
+    box-shadow: 3px black;
+    border-radius: 25px;
+}
+
+/* Newsletter*/
+.newsletter {
+    padding: 80px 0;
+    background: #f2f2f2;
+}
+
+.newsletter .content {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.newsletter .content h2 {
+    color: #243c4f;
+    margin-bottom: 40px;
+}
+
+.newsletter .content .form-control {
+    height: 50px;
+    border-color: #ffffff;
+    border-radius: 0;
+}
+
+.newsletter .content.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #243c4f;
+}
+
+.newsletter .content .btn {
+    min-height: 50px;
+    border-radius: 0;
+    background: #243c4f;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Otras paginas */
+
+.service {
+    padding: 30px;
+}
+
+.service-text {
+    display: grid;
+    place-items: center;
+}
+
+.salones,
+.presentacion {
+    width: 100%;
+    background: #9192922f;
+}
